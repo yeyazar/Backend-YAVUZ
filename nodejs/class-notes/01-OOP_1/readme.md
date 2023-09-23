@@ -11,21 +11,21 @@
 
 ### NPM
 ```sh
+    $ npm -h # $ npm help
+    $ npm list -h # $ npm help list
 
-    $ npm help
-
-    $ npm init -y # package.json
+    $ npm init -y # create package.json
     $ npm list
     
-    $ npm install express
+    $ npm install express # dependencies # package.json/scripts -> "start": "node index.js"
     $ npm i express --save
     
-    $ npm i nodemon --save-dev # package/scripts -> "dev": "nodemon index.js"
-    $ npm run dev # yarn dev
+    $ npm i nodemon --save-dev # devDependencies # package.json/scripts -> "devStart": "nodemon index.js"
+    # $ npm run devStart # yarn devStart
+    # $ npm i nodemon --save-optional # optionalDependencies # package.json/scripts -> "optionalStart": "nodemon index.js"
     
-    $ npm install # install packaces (at package.json)
-    $ npm install --production
-    $ npm i --omit=dev # install packaces with development modules
+    $ npm install # install all packages (from package.json)
+    $ npm i --omit=dev # $ npm i --omit dev # install packages without devDependencies list.
 
     # GLOBAL
     $ npm --global list 
@@ -34,7 +34,7 @@
     $ nodemon -v
 
     # NPX
-    $ npx create-react-app newfolder # Ctrl+C
+    $ npx create-react-app newfolder # Ctrl+C
 ```
 
 ### NodeShell
