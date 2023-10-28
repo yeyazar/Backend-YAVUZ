@@ -16,6 +16,13 @@ require("dotenv").config();
 const HOST = process.env.HOST || "http://localhost";
 const PORT = process.env.PORT || 8000;
 /*---------------------------------------------------------------*/
+/* HTTP_Methods & URLs */
+
+app.get('/', (request, response) => {
+
+})
+
+
 
 /*---------------------------------------------------------------*/
 app.listen(PORT, () => console.log(`Running on ${HOST}:${PORT}`));
