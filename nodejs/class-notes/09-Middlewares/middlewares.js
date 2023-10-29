@@ -41,75 +41,76 @@ app.get("/", (req, res) => {
 //! next() for next callBackFunction:
 
 const middleFunction1 = (req, res, next) => {
-  //   console.log(req.query);
-  const skip = req.query.skip ?? false;
+	//   console.log(req.query);
+	const skip = req.query.skip ?? false;
 
-  req.customData = "Custom Data With Request";
-  res.customDataWithResponse = "Custom Data With Response";
+	req.customData = "Custom Data With Request";
+	res.customDataWithResponse = "Custom Data With Response";
 
-  if (skip) {
-    // Bir sonraki route'a (bağımsız fonksiyona) git:
-    next("route");
-  } else {
-    // Bir sonraki callback fonksiyona git:
-    next();
-  }
+	if (skip) {
+		// Bir sonraki route'a (bağımsız fonksiyona) git:
+		next("route");
+	} else {
+		// Bir sonraki callback fonksiyona git:
+		next();
+	}
 };
 
 const middleFunction2 = (req, res, next) => {
-  // next();
+	// next();
 
-  res.send({
-    customData: [req.customData, res.customDataWithResponse],
-    message: "Here is func2, next() runned",
-  });
+	res.send({
+		customData: [req.customData, res.customDataWithResponse],
+		message: "Here is func2, next() runned"
+	});
 };
 
 // //? add to function like callBack:
 // app.get('/', middleFunction1, middleFunction2, (req, res) => { ... } )
 // //? It can be in array:
 app.get("/", [middleFunction1, middleFunction2], (req, res) => {
-  res.send({
-    customData: [req.customData, res.customDataWithResponse],
-    message: "Welcome to Home",
-  });
+	res.send({
+		customData: [req.customData, res.customDataWithResponse],
+		message: "Welcome to Home"
+	});
 });
 
 app.get("/", (req, res) => {
-  res.send({
-    message: "next route",
-  });
+	res.send({
+		message: "next route"
+	});
 });
 
 /* ------------------------------------------------------- */
 //* Middlewares & use():
 
 const middleFunction1 = (req, res, next) => {
-  //   console.log(req.query);
-  const skip = req.query.skip ?? false;
+	//   console.log(req.query);
+	const skip = req.query.skip ?? false;
 
-  req.customData = "Custom Data With Request";
-  res.customDataWithResponse = "Custom Data With Response";
+	req.customData = "Custom Data With Request";
+	res.customDataWithResponse = "Custom Data With Response";
 
-  if (skip) {
-    // Bir sonraki route'a (bağımsız fonksiyona) git:
-    next("route");
-  } else {
-    // Bir sonraki callback fonksiyona git:
-    next();
-  }
+	if (skip) {
+		// Bir sonraki route'a (bağımsız fonksiyona) git:
+		console.log("next-route worked");
+		next("route");
+	} else {
+		// Bir sonraki callback fonksiyona git:
+		console.log("next worked");
+		next();
+	}
 };
 
-app.get("/", (req, res) => {
-  res.send({
-    message: "first route",
-  });
-});
+app.use(middleFunction1) // default-url = *
+// app.use('/*', middleFunction1) // default-url = *
 
-app.get("/", (req, res) => {
-  res.send({
-    message: "second route",
-  });
+// app.use("/path", middleFunction1); // /path == /path/*
+
+app.get("/*", (req, res) => {
+	res.send({
+		message: "first route",
+	});
 });
 
 /* ------------------------------------------------------- */
