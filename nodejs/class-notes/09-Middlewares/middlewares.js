@@ -13,13 +13,11 @@ const PORT = process.env.PORT || 8000;
 //? Middleware functions must be has three parameters.
 //? Last parameter is for next().
 
-
-
-
-app.get('/', (req, res) => {
-    
-})
-
+app.get("/", (req, res) => {
+  res.send({
+    message: "Welcome to Home",
+  });
+});
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
