@@ -19,8 +19,8 @@ const PORT = process.env.PORT || 8000;
 app.get('/', (req, res, next) => {
 
     // Request/Response parametresi ile next() metoduna veri gönderebilirim.
-    // req.customData = 'Custom Data With Request'
-    // res.customDataWithResponse = 'Custom Data With Response'
+    req.customData = 'Custom Data With Request'
+    res.customDataWithResponse = 'Custom Data With Response'
 
     next() // Go to next Function.
 
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
         req.customData,
         res.customDataWithResponse
     ],
-    message: "Welcome",
+    message: "Welcome to Home",
   });
 });
 
