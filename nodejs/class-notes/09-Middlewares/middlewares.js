@@ -81,7 +81,7 @@ app.get("/", (req, res) => {
 	});
 });
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 //* Middlewares & use():
 
 const middleFunction1 = (req, res, next) => {
@@ -102,16 +102,33 @@ const middleFunction1 = (req, res, next) => {
 	}
 };
 
-app.use(middleFunction1) // default-url = *
+const middleFunction2 = (req, res, next) => {
+	// next();
+
+	res.send({
+		customData: [req.customData, res.customDataWithResponse],
+		message: "Here is func2, next() runned",
+	});
+};
+
+// app.use(middleFunction1) // default-url = *
 // app.use('/*', middleFunction1) // default-url = *
 
 // app.use("/path", middleFunction1); // /path == /path/*
+
+// app.use(middleFunction1, middleFunction2);
+app.use([middleFunction1, middleFunction2]);
 
 app.get("/*", (req, res) => {
 	res.send({
 		message: "first route",
 	});
 });
+
+/* ------------------------------------------------------- */
+//* Calling middlewares from file:
+
+
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
