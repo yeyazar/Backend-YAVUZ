@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
   });
 });
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 //! next() for next callBackFunction:
 
 const middleFunction1 = (req, res, next) => {
@@ -81,8 +81,36 @@ app.get("/", (req, res) => {
   });
 });
 
-/* ------------------------------------------------------- *
+/* ------------------------------------------------------- */
 //* Middlewares & use():
+
+const middleFunction1 = (req, res, next) => {
+  //   console.log(req.query);
+  const skip = req.query.skip ?? false;
+
+  req.customData = "Custom Data With Request";
+  res.customDataWithResponse = "Custom Data With Response";
+
+  if (skip) {
+    // Bir sonraki route'a (bağımsız fonksiyona) git:
+    next("route");
+  } else {
+    // Bir sonraki callback fonksiyona git:
+    next();
+  }
+};
+
+app.get("/", (req, res) => {
+  res.send({
+    message: "first route",
+  });
+});
+
+app.get("/", (req, res) => {
+  res.send({
+    message: "second route",
+  });
+});
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
