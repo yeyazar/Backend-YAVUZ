@@ -30,4 +30,4 @@ const middleFunction2 = (req, res, next) => {
 	});
 };
 
-module.export = [middleFunction1, middleFunction2];
+module.exports = [middleFunction1, middleFunction2];
