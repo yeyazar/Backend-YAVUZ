@@ -67,6 +67,12 @@ app.get('/async', async (req, res, next) => {
 })
 
 /* ------------------------------------------------------- */
+// express-async-handler
+// $ npm i express-async-handler
+
+
+
+/* ------------------------------------------------------- */
 //? use(errorHandler) kodlamanın en sonunda yer almalı.
 
 const errorHandler = (err, req, res, next) => {
