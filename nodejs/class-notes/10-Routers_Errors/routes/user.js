@@ -9,7 +9,7 @@
 const router = require("express").Router();
 
 const routeControl = (req, res, next) => {
-	const { username} = req.query;
+	const { username } = req.query;
 
 	if (username == "clarusway") {
 		next();
@@ -20,7 +20,23 @@ const routeControl = (req, res, next) => {
 	}
 };
 
-router.use();
+// We can use middleware with router:
+router.use(routeControl);
+
+router
+	.route("/extra")
+	.get((req, res) => {
+		res.send({ message: "get" });
+	})
+	.post((req, res) => {
+		res.send({ message: "post" });
+	})
+	.put((req, res) => {
+		res.send({ message: "put" });
+	})
+	.delete((req, res) => {
+		res.send({ message: "delete" });
+	});
 
 router.get("/", (req, res) => {
 	res.send({ message: "All User" });
