@@ -14,7 +14,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 
 app.get("/user/:id", (req, res) => {
 	const id = req.params.id ?? 0;
@@ -29,7 +29,7 @@ app.get("/user/:id", (req, res) => {
 	}
 });
 
-/* ------------------------------------------------------- *
+/* ------------------------------------------------------- */
 // TRY-CATCH:
 
 app.get('/user/:id', (req, res, next) => {
@@ -46,28 +46,33 @@ app.get('/user/:id', (req, res, next) => {
         }
     } catch (err) {
 
-        console.log('try-catch runned')
+        console.log('try-catch runs');
         next(err) // Go to errorHandler()
 
-        res.send({ 
-            error: true, 
-            message: err.message,
-            cause: err.cause
-        })
+        // res.send({ 
+        //     error: true, 
+        //     message: err.message,
+        //     cause: err.cause
+        // })
     }
 
 })
 /* ------------------------------------------------------- */
+// ASYNC:
+
+
+
+
 
 /* ------------------------------------------------------- */
 //? use(errorHandler) kodlamanın en sonunda yer almalı.
 
 const errorHandler = (err, req, res, next) => {
-    const statusCode = res.errorStatusCode ?? 500
+    //const statusCode = res.errorStatusCode ?? 500
 
 	console.log("errorHandler runs");
 
-	res.status(statusCode).send({
+	res.status(400).send({
 		error: true, // special data
 		message: err.message, // Error string Message
 		cause: err.cause, // Error optional cause
