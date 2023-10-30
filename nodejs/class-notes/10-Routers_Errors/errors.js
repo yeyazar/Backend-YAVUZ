@@ -54,7 +54,7 @@ app.get("/user/:id", (req, res, next) => {
 		// })
 	}
 });
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 // ASYNC:
 
 const asyncFunction = async () => {
@@ -62,25 +62,33 @@ const asyncFunction = async () => {
 };
 
 //? Control with catch(next)
-app.get('/async', async (req, res, next) => {
-    await asyncFunction().catch(next) // Go to errorHandler()
-})
+app.get("/async", async (req, res, next) => {
+	await asyncFunction().catch(next); // Go to errorHandler()
+});
 
 /* ------------------------------------------------------- */
 // express-async-handler
 // $ npm i express-async-handler
 
+const asyncHandler = require("express-async-handler");
 
+app.get(
+	"/async",
+	asyncHandler(async (req, res, next) => {
+		res.errorStatusCode = 400;
+		throw new Error("Created error in async-func");
+	})
+);
 
 /* ------------------------------------------------------- */
 //? use(errorHandler) kodlamanın en sonunda yer almalı.
 
 const errorHandler = (err, req, res, next) => {
-	//const statusCode = res.errorStatusCode ?? 500
+	const statusCode = res.errorStatusCode ?? 500;
 
 	console.log("errorHandler runs");
 
-	res.status(400).send({
+	res.status(statusCode).send({
 		error: true, // special data
 		message: err.message, // Error string Message
 		cause: err.cause, // Error optional cause
