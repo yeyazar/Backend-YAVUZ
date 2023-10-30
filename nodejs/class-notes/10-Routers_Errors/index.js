@@ -1,10 +1,10 @@
-"use strict"
+"use strict";
 
-const express = require("express")
-const app = express()
+const express = require("express");
+const app = express();
 
-require("dotenv").config()
-const PORT = process.env.PORT || 8000
+require("dotenv").config();
+const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
 //? "Router" is special app for URL control in ExpressJS.
@@ -19,7 +19,19 @@ const PORT = process.env.PORT || 8000
 // 	res.send({ message: "User Page" })
 // })
 
-const router = express.Router()
+const router = express.Router();
+router.get("/", (req, res) => {
+	res.send({ message: "Home Page" });
+});
+router.get("/about", (req, res) => {
+	res.send({ message: "About Page" });
+});
+router.get("/user:userId", (req, res) => {
+	res.send({ message: "User Page" });
+});
+
+//Router to App
+app.use(router);
 
 /* ------------------------------------------------------- */
-app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT))
+app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
