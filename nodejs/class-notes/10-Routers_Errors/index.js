@@ -21,10 +21,12 @@ const PORT = process.env.PORT || 8000;
 // Router to App
 // app.use(router);
 
-// const router = require('./routes/')
+// const router = require('./routes/index.js')
 // app.use(router)
 
-app.use(require("./routes/index.js"));
+// app.use(require("./routes/"));
+
+app.use('/user', require('./routes/user.js'))
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
