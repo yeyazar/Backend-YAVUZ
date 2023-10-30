@@ -29,46 +29,48 @@ app.get("/user/:id", (req, res) => {
 	}
 });
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 // TRY-CATCH:
 
-app.get('/user/:id', (req, res, next) => {
+app.get("/user/:id", (req, res, next) => {
+	try {
+		const id = req.params.id ?? 0;
+		if (isNaN(id)) {
+			throw new Error("ID is Not A Number", { cause: "params.id=" + id });
+		} else {
+			res.send({
+				error: false,
+				id: id,
+			});
+		}
+	} catch (err) {
+		console.log("try-catch runs");
+		next(err); // Go to errorHandler()
 
-    try {
-        const id = req.params.id ?? 0
-        if (isNaN(id)) {
-            throw new Error('ID is Not A Number', { cause: 'params.id='+id })
-        } else {
-            res.send({ 
-                error: false, 
-                id: id
-            })
-        }
-    } catch (err) {
-
-        console.log('try-catch runs');
-        next(err) // Go to errorHandler()
-
-        // res.send({ 
-        //     error: true, 
-        //     message: err.message,
-        //     cause: err.cause
-        // })
-    }
-
-})
+		// res.send({
+		//     error: true,
+		//     message: err.message,
+		//     cause: err.cause
+		// })
+	}
+});
 /* ------------------------------------------------------- */
 // ASYNC:
 
+const asyncFunction = async () => {
+	throw new Error("Created error in async-func");
+};
 
-
-
+//? Control with catch(next)
+app.get('/async', async (req, res, next) => {
+    await asyncFunction().catch(next) // Go to errorHandler()
+})
 
 /* ------------------------------------------------------- */
 //? use(errorHandler) kodlamanın en sonunda yer almalı.
 
 const errorHandler = (err, req, res, next) => {
-    //const statusCode = res.errorStatusCode ?? 500
+	//const statusCode = res.errorStatusCode ?? 500
 
 	console.log("errorHandler runs");
 
