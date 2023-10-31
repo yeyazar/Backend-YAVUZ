@@ -18,7 +18,10 @@ app.all("/", (req, res) => {
 });
 
 /*-------------------------------------------------------------------------*/
+//* SEQUELIZE
+//? npm i sequelize sqlite3
 
+const { Sequelize, DataType } = require('sequelize')
 
 
 
