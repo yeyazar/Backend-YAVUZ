@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 
 /*-------------------------------------------------------------------------*/
 // Accept json data & convert to object:
-app.use(express.json())
+app.use(express.json());
 
 app.all("/", (req, res) => {
 	res.send("WELCOME TODO API");
@@ -21,22 +21,63 @@ app.all("/", (req, res) => {
 //* SEQUELIZE
 //? npm i sequelize sqlite3
 
-const { Sequelize, DataType } = require('sequelize')
+// https://sequelize.org/docs/v6/getting-started/
+const { Sequelize, DataType } = require("sequelize");
+// Where is DB (DB Connection Details):
+// const sequelize = new Sequelize('sqlite:./db.sqlite3')
+const sequelize = new Sequelize("sqlite:" + (process.env.SQLITE || "./db.sqlite3"));
+
+// sequelize.define('tableName', { columns })
+const Todo = sequelize.define("todo", {
+	// https://sequelize.org/docs/v7/models/data-types/
+
+	id: {
+		type: DataTypes.INTEGER,
+		unique: true,
+		allowNull: false, // default: true
+		field_name: "custom_column_name", // Change column name
+		comment: "Description",
+		primaryKey: true,
+		autoIncrement: true,
+	},
+	title: {
+		type: DataTypes.STRING(64),
+		allowNull: false,
+	},
+
+    description: DataTypes.TEXT, // ShortHand Using.
+
+    priority: { // 1: High, 0: Normal, -1: Low
+        type: DataTypes.TINYINT, // postgres: INTEGER
+        allowNull: false,
+        defaultValue: 0, // set default value.
+    },
+
+    isDone: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
+    
+    //? Not need define "createdAt" & "updatedAt" fields.
+    // createdAt: false, // Unset
+    // updatedAt: false, // Unset
 
 
+});
 
 /*-------------------------------------------------------------------------*/
 const errorHandler = (err, req, res, next) => {
-    const errorStatusCode = res.errorStatusCode ?? 500
-    console.log('errorHandler runned.')
-    res.status(errorStatusCode).send({
-        error: true, // special data
-        message: err.message, // error string message
-        cause: err.cause, // error option cause
-        // stack: err.stack, // error details
-        body: req.body,
-    })
-}
-app.use(errorHandler)
+	const errorStatusCode = res.errorStatusCode ?? 500;
+	console.log("errorHandler runned.");
+	res.status(errorStatusCode).send({
+		error: true, // special data
+		message: err.message, // error string message
+		cause: err.cause, // error option cause
+		// stack: err.stack, // error details
+		body: req.body,
+	});
+};
+app.use(errorHandler);
 /*-------------------------------------------------------------------------*/
 app.listen(PORT, () => console.log("Running -> http://127.0.0.1:" + PORT));
