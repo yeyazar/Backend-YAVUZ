@@ -66,7 +66,10 @@ const Todo = sequelize.define("todo", {
 });
 
 // Synchronization:
-sequelize.sync();
+//! SYNC MUST RUN ONCE!
+// sequelize.sync() // CREATE TABLE
+// sequelize.sync({ force: true }) // DROP & CREATE
+sequelize.sync({ alter: true }) // TO BACKUP & DROP & CREATE & FROM BACKUP
 
 /*-------------------------------------------------------------------------*/
 const errorHandler = (err, req, res, next) => {
