@@ -20,7 +20,7 @@ app.all("/", (req, res) => {
 /* ------------------------------------------------------- */
 //* TodoModel moved to todo.model.js
 
-
+app.use(require("./todo.router"));
 
 /*-------------------------------------------------------------------------*/
 const errorHandler = (err, req, res, next) => {
