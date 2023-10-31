@@ -71,6 +71,11 @@ const Todo = sequelize.define("todo", {
 // sequelize.sync({ force: true }) // DROP & CREATE
 sequelize.sync({ alter: true }) // TO BACKUP & DROP & CREATE & FROM BACKUP
 
+// Connect:
+sequelize.authenticate()
+    .then(() => console.log('* DB Connected *'))
+    .catch((err) => console.log('* DB Not Connected *', err))
+
 /*-------------------------------------------------------------------------*/
 const errorHandler = (err, req, res, next) => {
 	const errorStatusCode = res.errorStatusCode ?? 500;
