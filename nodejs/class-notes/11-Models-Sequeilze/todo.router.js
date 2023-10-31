@@ -18,10 +18,13 @@ router.get("/", async (req, res) => {
 });
 
 // CREATE
+router.post("/", async (req, res) => {
+	const data = await Todo.create(req.body);
+    res.send({
+		error: false,
+        message: 'Created',
+		result: data,
+	});
+});
 
-
-
-
-
-
-module.exports = router
+module.exports = router;
