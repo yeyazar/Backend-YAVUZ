@@ -5,6 +5,10 @@
 const express = require("express");
 const app = express();
 
+app.all("/all", (req, res) => {
+	res.send("WELCOME TODO API");
+});
+
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 /*-------------------------------------------------------------------------*/
