@@ -20,10 +20,10 @@ router.get("/", async (req, res) => {
 // CREATE
 router.post("/", async (req, res) => {
 	const data = await Todo.create(req.body);
-    res.send({
+	res.send({
 		error: false,
-        body: req.body, // Send Data
-        message: 'Created',
+		body: req.body, // Send Data
+		message: "Created",
 		result: data, // Receive Data
 	});
 });
