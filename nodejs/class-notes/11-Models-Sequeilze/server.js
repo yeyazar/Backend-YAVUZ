@@ -31,40 +31,42 @@ const sequelize = new Sequelize("sqlite:" + (process.env.SQLITE || "./db.sqlite3
 const Todo = sequelize.define("todo", {
 	// https://sequelize.org/docs/v7/models/data-types/
 
-	id: {
-		type: DataTypes.INTEGER,
-		unique: true,
-		allowNull: false, // default: true
-		field_name: "custom_column_name", // Change column name
-		comment: "Description",
-		primaryKey: true,
-		autoIncrement: true,
-	},
+	// id: { //? Not need define ID field, it will create auto.
+	// 	type: DataTypes.INTEGER,
+	// 	unique: true,
+	// 	allowNull: false, // default: true
+	// 	field: "custom_column_name", // Change column name
+	// 	comment: "Description",
+	// 	primaryKey: true,
+	// 	autoIncrement: true,
+	// },
 	title: {
 		type: DataTypes.STRING(64),
 		allowNull: false,
 	},
 
-    description: DataTypes.TEXT, // ShortHand Using.
+	description: DataTypes.TEXT, // ShortHand Using.
 
-    priority: { // 1: High, 0: Normal, -1: Low
-        type: DataTypes.TINYINT, // postgres: INTEGER
-        allowNull: false,
-        defaultValue: 0, // set default value.
-    },
+	priority: {
+		// 1: High, 0: Normal, -1: Low
+		type: DataTypes.TINYINT, // postgres: INTEGER
+		allowNull: false,
+		defaultValue: 0, // set default value.
+	},
 
-    isDone: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-    },
-    
-    //? Not need define "createdAt" & "updatedAt" fields.
-    // createdAt: false, // Unset
-    // updatedAt: false, // Unset
+	isDone: {
+		type: DataTypes.BOOLEAN,
+		allowNull: false,
+		defaultValue: false,
+	},
 
-
+	//? Not need define "createdAt" & "updatedAt" fields.
+	// createdAt: false, // Unset
+	// updatedAt: false, // Unset
 });
+
+// Synchronization:
+sequelize.sync();
 
 /*-------------------------------------------------------------------------*/
 const errorHandler = (err, req, res, next) => {
