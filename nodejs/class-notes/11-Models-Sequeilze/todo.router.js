@@ -11,7 +11,7 @@ const Todo = require("./todo.model");
 router.get("/", async (req, res) => {
 	// const data = await Todo.findAll()
 	const data = await Todo.findAndCountAll();
-	res.send({
+	res.status(200).send({
 		error: false,
 		result: data,
 	});
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 // CREATE
 router.post("/", async (req, res) => {
 	const data = await Todo.create(req.body);
-	res.send({
+	res.status(201).send({
 		error: false,
 		body: req.body, // Send Data
 		message: "Created",
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
 	// const data = await Todo.findOne({ where: { id: req.params.id } })
 
 	const data = await Todo.findByPk(req.params.id);
-	res.send({
+	res.status(200).send({
 		error: false,
 		result: data,
 	});
@@ -44,7 +44,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
 	// Model.update({ newData }, { filter })
 	const isUpdated = await Todo.update(req.body, { where: { id: req.params.id } });
-	res.send({
+	res.status(202).send({
 		error: false,
 		body: req.body, // Send Data
 		message: "Updated",
@@ -57,11 +57,16 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
 	// Model.destroy({filter})
 	const isDeleted = await Todo.destroy({ where: { id: req.params.id } });
-	res.send({
-		error: false,
-		message: "Deleted",
-		isDeleted: Boolean(isDeleted),
-	});
+	if (isDeleted) {
+        res.sendStatus(204)
+    } else {
+        res.sendStatus(404)
+    }
+	// res.status(204).send({
+	// 	error: false,
+	// 	message: "Deleted",
+	// 	isDeleted: Boolean(isDeleted),
+	// });
 });
 
 module.exports = router;
