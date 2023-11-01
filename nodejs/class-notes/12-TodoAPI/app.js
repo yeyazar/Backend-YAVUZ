@@ -13,11 +13,12 @@ const PORT = process.env.PORT || 8000;
 // Accept json data & convert to object:
 app.use(express.json());
 
-
 // DatabaseConnection:
-app.use(require('./app/dbConnection'))
+const dbConnection = require("./app/dbConnection");
+dbConnection();
 
 // errorHandler (Catch Errors):
 app.use(require("./app/errorHandler"));
+
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
