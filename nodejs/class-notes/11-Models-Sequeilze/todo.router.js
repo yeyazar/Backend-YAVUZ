@@ -60,7 +60,7 @@ router.delete("/:id", async (req, res) => {
 	res.send({
 		error: false,
 		message: "Deleted",
-		isDeleted: Boolean(isDeleted[0]),
+		isDeleted: Boolean(isDeleted),
 	});
 });
 
