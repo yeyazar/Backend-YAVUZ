@@ -23,6 +23,7 @@ app.use(express.json());
 app.use(require("./todo.router"));
 
 /*-------------------------------------------------------------------------*/
+
 const errorHandler = (err, req, res, next) => {
 	const errorStatusCode = res.errorStatusCode ?? 500;
 	console.log("errorHandler runned.");
