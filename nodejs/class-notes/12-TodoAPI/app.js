@@ -14,8 +14,8 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 
 
-
-
+// DatabaseConnection:
+app.use(require('./app/dbConnection'))
 
 // errorHandler (Catch Errors):
 app.use(require("./app/errorHandler"));
