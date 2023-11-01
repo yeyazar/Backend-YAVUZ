@@ -9,7 +9,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize("sqlite:" + (process.env.SQLITE || "./db.sqlite3"));
 
-const dbConnection = function () {
+module.exports = function () {
 	// Synchronization:
 	//! SYNC MUST RUN ONCE!
 	// sequelize.sync() // CREATE TABLE
@@ -22,5 +22,3 @@ const dbConnection = function () {
 		.then(() => console.log("* DB Connected *"))
 		.catch((err) => console.log("* DB Not Connected *", err));
 };
-
-module.exports = dbConnection;

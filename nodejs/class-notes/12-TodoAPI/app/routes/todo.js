@@ -5,7 +5,7 @@
 
 const router = require("express").Router();
 
-const Todo = require("./todo.model");
+const Todo = require("../models/todo");
 
 // LIST:
 router.get("/", async (req, res) => {
@@ -58,10 +58,10 @@ router.delete("/:id", async (req, res) => {
 	// Model.destroy({filter})
 	const isDeleted = await Todo.destroy({ where: { id: req.params.id } });
 	if (isDeleted) {
-        res.sendStatus(204)
-    } else {
-        res.sendStatus(404)
-    }
+		res.sendStatus(204);
+	} else {
+		res.sendStatus(404);
+	}
 	// res.status(204).send({
 	// 	error: false,
 	// 	message: "Deleted",

@@ -13,9 +13,12 @@ const PORT = process.env.PORT || 8000;
 // Accept json data & convert to object:
 app.use(express.json());
 
+// Router
+app.use(require("./app/routes/todo"));
+
 // DatabaseConnection:
 const dbConnection = require("./app/dbConnection");
-dbConnection();
+dbConnection(); // sequelize.sync() must run after model defines.
 
 // errorHandler (Catch Errors):
 app.use(require("./app/errorHandler"));
