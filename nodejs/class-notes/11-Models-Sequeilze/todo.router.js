@@ -43,12 +43,24 @@ router.get("/:id", async (req, res) => {
 // UPDATE
 router.put("/:id", async (req, res) => {
 	// Model.update({ newData }, { filter })
-	const data = await Todo.update(req.body, { where: { id: req.params.id } });
+	const isUpdated = await Todo.update(req.body, { where: { id: req.params.id } });
 	res.send({
 		error: false,
 		body: req.body, // Send Data
 		message: "Updated",
-		result: data, // Receive Data
+		isUpdated: Boolean(isUpdated[0]),
+		result: await Todo.findByPk(req.params.id),
+	});
+});
+
+// DELETE
+router.delete("/:id", async (req, res) => {
+	// Model.destroy({filter})
+	const isDeleted = await Todo.destroy({ where: { id: req.params.id } });
+	res.send({
+		error: false,
+		message: "Deleted",
+		isDeleted: Boolean(isDeleted[0]),
 	});
 });
 
