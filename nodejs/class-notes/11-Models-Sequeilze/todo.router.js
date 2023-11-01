@@ -30,10 +30,25 @@ router.post("/", async (req, res) => {
 
 // READ
 router.get("/:id", async (req, res) => {
+	// https://sequelize.org/docs/v6/core-concepts/model-querying-finders/
+	// const data = await Todo.findOne({ where: { id: req.params.id } })
+
 	const data = await Todo.findByPk(req.params.id);
 	res.send({
 		error: false,
 		result: data,
+	});
+});
+
+// UPDATE
+router.put("/:id", async (req, res) => {
+	// Model.update({ newData }, { filter })
+	const data = await Todo.update(req.body, { where: { id: req.params.id } });
+	res.send({
+		error: false,
+		body: req.body, // Send Data
+		message: "Updated",
+		result: data, // Receive Data
 	});
 });
 
