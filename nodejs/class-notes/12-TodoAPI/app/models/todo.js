@@ -51,4 +51,15 @@ const Todo = sequelize.define("todo", {
 	// updatedAt: false, // Unset
 });
 
+// Synchronization:
+    //! SYNC MUST RUN ONCE!
+    // sequelize.sync() // CREATE TABLE
+    // sequelize.sync({ force: true }) // DROP & CREATE
+    sequelize.sync({ alter: true }) // TO BACKUP & DROP & CREATE & FROM BACKUP
+    
+    // Connect:
+    sequelize.authenticate()
+        .then(() => console.log('* DB Connected *'))
+        .catch((err) => console.log('* DB Not Connected *', err))
+
 module.exports = Todo;
