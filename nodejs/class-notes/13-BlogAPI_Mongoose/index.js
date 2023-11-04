@@ -18,11 +18,13 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 
+// MongoDB connection with  Mongoose
+require("./src/dbConnection.js");
+
 app.all("/", (req, res) => {
 	res.send("WELCOME TO BLOG API");
 });
 
-require("./src/dbConnection.js");
 
 /* ------------------------------------------------------- */
 // error handler
