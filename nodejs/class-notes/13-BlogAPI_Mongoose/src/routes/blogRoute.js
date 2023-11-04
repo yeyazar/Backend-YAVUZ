@@ -2,7 +2,7 @@
 /* -------------------------------------------------------
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
-const router = required("express").Router();
+const router = require("express").Router();
 
 const { BlogPost } = require("../controllers/blogController.js");
 
