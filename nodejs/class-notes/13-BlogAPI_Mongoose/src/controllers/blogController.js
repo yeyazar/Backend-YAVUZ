@@ -5,7 +5,7 @@
 // https://mongoosejs.com/docs/queries.html
 
 // catch error
-require("express-async-error");
+require("express-async-errors");
 
 const { BlogPost } = require("../models/blogModel.js");
 

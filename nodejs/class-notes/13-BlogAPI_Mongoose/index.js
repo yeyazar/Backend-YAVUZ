@@ -25,7 +25,8 @@ app.all("/", (req, res) => {
 	res.send("WELCOME TO BLOG API");
 });
 
-
+// Routes:
+app.use(require("./src/routes/blogRoute.js"));
 
 /* ------------------------------------------------------- */
 // error handler
