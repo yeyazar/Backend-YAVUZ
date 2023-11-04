@@ -18,12 +18,13 @@ module.exports.BlogPost = {
 
 		res.status(200).send({
 			error: false,
+			count: data.length,
 			result: data,
 		});
 	},
 
 	create: async (req, res) => {
-		const data = await BlogPost.insertOne(req.body);
+		const data = await BlogPost.create(req.body);
 
 		res.status(201).send({
 			error: false,
@@ -32,9 +33,31 @@ module.exports.BlogPost = {
 		});
 	},
 
-	read: async (req, res) => {},
+	read: async (req, res) => {
+		// req.params.postId
+		// const data = await BlogPost.findById(req.params.postId );
+		const data = await BlogPost.findOne({ _id: req.params.postId });
 
-	update: async (req, res) => {},
+		res.status(200).send({
+			error: false,
+			result: data,
+		});
+	},
 
-	delete: async (req, res) => {},
+	update: async (req, res) => {
+		const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body);
+
+		res.status(202).send({
+			error: false,
+			body: req.body,
+			result: data,
+			newData: await BlogPost.findOne({ _id: req.params.postId }),
+		});
+	},
+
+	delete: async (req, res) => {
+		const data = await BlogPost.deleteOne({ _id: req.params.postId });
+
+		res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
+	},
 };
