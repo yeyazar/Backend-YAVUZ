@@ -5,6 +5,8 @@
 
 const mongoose = require("mongoose");
 
+/*------------------------------------------------------- *
+
 const nameSchema = new mongoose.Schema(
 	{
 		// _id: // AUTO CREATED
@@ -40,3 +42,39 @@ const nameSchema = new mongoose.Schema(
 		timestamps: true, // CreatedAt, UpdatedAt
 	}
 );
+
+/*------------------------------------------------------- */
+
+const blogPostSchema = new mongoose.Schema(
+	{
+		title: {
+			type: String,
+			trim: true,
+			required: true,
+		},
+
+		content: {
+			type: String,
+			trim: true,
+			required: true,
+		},
+
+		published: {
+			type: Boolean,
+			default: true,
+		},
+
+		// CreatedAt & UpdatedAt will be added automatically
+	},
+	{ collection: "blogPosts", timestamps: true }
+);
+
+// const blogPostModel = mongoose.model("BlogPost", blogPostSchema);
+
+// module.exports = {
+// 	BlogPost: blogPostModel,
+// };
+
+module.exports = {
+	BlogPost: mongoose.model("BlogPost", blogPostSchema),
+};
