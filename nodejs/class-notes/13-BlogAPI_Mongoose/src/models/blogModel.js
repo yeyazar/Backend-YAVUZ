@@ -90,5 +90,6 @@ const blogPostSchema = new mongoose.Schema(
 // };
 
 module.exports = {
+	BlogCategory: mongoose.model("BlogCategory", blogCategorySchema),
 	BlogPost: mongoose.model("BlogPost", blogPostSchema),
 };
