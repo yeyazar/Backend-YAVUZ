@@ -61,4 +61,23 @@ module.exports.User = {
 
 		res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
 	},
+
+	login: async (req, res) => {
+		const { email, password } = req.body;
+
+		if (email && password) {
+			// No need for -> passwordEncrypt(password) cause of set()
+			const user = await User.findOne({ email: email, password: password });
+
+			if (user) {
+				res.status(200).send({
+					error: false,
+					result: data,
+				});
+			} else {
+				res.errorStatusCode = 401;
+				throw new Error("login parameters incorrect");
+			}
+		}
+	},
 };
