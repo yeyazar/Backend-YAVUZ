@@ -21,6 +21,6 @@ module.exports = async () => {
     }
 
     // End:
-    console.log('* Synchronised *')
+    console.log(' * Synchronised ->> Added BlogCategory*')
     /* Finished */
 }

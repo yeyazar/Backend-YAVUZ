@@ -1,36 +1,37 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
-const router = require('express').Router()
+const router = require("express").Router();
 
-// Call Controllers:
-const { BlogCategory, BlogPost } = require('../controllers/blogController')
+const { BlogCategory, BlogPost } = require("../controllers/blogController.js");
 
 // ------------------------------------------
 // BlogCategory
 // ------------------------------------------
-router.route('/category')
+router.route("/category")
     .get(BlogCategory.list)
-    .post(BlogCategory.create)
+    .post(BlogCategory.create);
 
-router.route('/category/:categoryId')
+router.route("/category/:categoryId")
     .get(BlogCategory.read)
     .put(BlogCategory.update)
-    .delete(BlogCategory.delete)
+    .delete(BlogCategory.delete);
 
+    
 // ------------------------------------------
 // BlogPost
 // ------------------------------------------
-router.route('/post')
+router.route("/post")
     .get(BlogPost.list)
-    .post(BlogPost.create)
+    .post(BlogPost.create);
 
-router.route('/post/:postId')
+router.route("/post/:postId")
     .get(BlogPost.read)
     .put(BlogPost.update)
-    .delete(BlogPost.delete)
+    .delete(BlogPost.delete);
 
-router.get('/category/:categoryId/posts', BlogPost.listCategoryPosts)
+router.get('/category/:categoryId/posts', BlogPost.listInCategory)
 
-module.exports = router
+
+module.exports = router;
