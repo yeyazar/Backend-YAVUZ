@@ -18,7 +18,7 @@ router.route("/category/:categoryId")
     .put(BlogCategory.update)
     .delete(BlogCategory.delete);
 
-
+    
 // ------------------------------------------
 // BlogPost
 // ------------------------------------------
