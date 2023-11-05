@@ -70,6 +70,13 @@ module.exports.User = {
 			const user = await User.findOne({ email: email, password: password });
 
 			if (user) {
+				req.session = {
+					user: {
+						email: user.email,
+						password: user.password,
+					},
+				};
+
 				res.status(200).send({
 					error: false,
 					result: user,
