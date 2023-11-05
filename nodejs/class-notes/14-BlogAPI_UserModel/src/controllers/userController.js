@@ -32,9 +32,9 @@ module.exports.User = {
 	},
 
 	read: async (req, res) => {
-		// req.params.categoryId
-		// const data = await User.findById(req.params.categoryId );
-		const data = await User.findOne({ _id: req.params.categoryId });
+		// req.params.userId
+		// const data = await User.findById(req.params.userId );
+		const data = await User.findOne({ _id: req.params.userId });
 
 		res.status(200).send({
 			error: false,
@@ -43,18 +43,18 @@ module.exports.User = {
 	},
 
 	update: async (req, res) => {
-		const data = await User.updateOne({ _id: req.params.categoryId }, req.body);
+		const data = await User.updateOne({ _id: req.params.userId }, req.body);
 
 		res.status(202).send({
 			error: false,
 			body: req.body,
 			result: data,
-			newData: await User.findOne({ _id: req.params.categoryId }),
+			newData: await User.findOne({ _id: req.params.userId }),
 		});
 	},
 
 	delete: async (req, res) => {
-		const data = await User.deleteOne({ _id: req.params.categoryId });
+		const data = await User.deleteOne({ _id: req.params.userId });
 
 		res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
 	},
