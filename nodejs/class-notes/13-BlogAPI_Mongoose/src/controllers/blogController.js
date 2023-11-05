@@ -7,10 +7,9 @@
 // catch error
 require("express-async-errors");
 
-
 /*------------------------------------------------------- */
 //  Call Models
-const { BlogCategory ,BlogPost } = require("../models/blogModel.js");
+const { BlogCategory, BlogPost } = require("../models/blogModel.js");
 
 // ------------------------------------------
 // BlogCategory
@@ -65,7 +64,6 @@ module.exports.BlogCategory = {
 	},
 };
 
-
 // ------------------------------------------
 // BlogPost
 // ------------------------------------------
@@ -118,5 +116,3 @@ module.exports.BlogPost = {
 		res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
 	},
 };
-
-
