@@ -72,12 +72,15 @@ module.exports.User = {
 			if (user) {
 				res.status(200).send({
 					error: false,
-					result: data,
+					result: user,
 				});
 			} else {
 				res.errorStatusCode = 401;
 				throw new Error("login parameters incorrect");
 			}
+		} else {
+			res.errorStatusCode = 400;
+			throw new Error("email/password not entered");
 		}
 	},
 };
