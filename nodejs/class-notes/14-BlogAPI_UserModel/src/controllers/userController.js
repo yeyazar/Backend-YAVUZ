@@ -5,7 +5,7 @@
 // catch error
 require("express-async-errors");
 
-const User = require('../models/userModel')
+const User = require("../models/userModel");
 
 // ------------------------------------------
 // User
@@ -43,7 +43,10 @@ module.exports.User = {
 	},
 
 	update: async (req, res) => {
-		const data = await User.updateOne({ _id: req.params.userId }, req.body);
+		// const data = await User.updateOne({ _id: req.params.userId }, req.body);
+		const data = await User.updateOne({ _id: req.params.userId }, req.body, {
+			runValidators: true,
+		});
 
 		res.status(202).send({
 			error: false,
@@ -59,5 +62,3 @@ module.exports.User = {
 		res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
 	},
 };
-
-
