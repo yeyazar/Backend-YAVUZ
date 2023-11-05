@@ -31,7 +31,7 @@ app.use("/blog", require("./src/routes/blogRoute.js"));
 
 /* ------------------------------------------------------- */
 // Synchronization
-// require('./src/sync.js')()
+require('./src/sync.js')()
 
 // error handler
 app.use(require("./src/errorHandler.js"));
