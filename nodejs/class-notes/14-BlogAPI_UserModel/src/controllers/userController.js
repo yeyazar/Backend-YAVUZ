@@ -96,4 +96,13 @@ module.exports.User = {
 			throw new Error("email/password not entered");
 		}
 	},
+
+	logout: async (req, res) => {
+		console.log("user.logout");
+		req.session = null;
+		res.status(200).send({
+			error: false,
+			message:'Logout'
+		});
+	},
 };
