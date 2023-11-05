@@ -69,7 +69,17 @@ module.exports.BlogCategory = {
 // ------------------------------------------
 module.exports.BlogPost = {
 	list: async (req, res) => {
-		const data = await BlogPost.find();
+		const data = await BlogPost.find().populate("blogCategoryId"); // get primary data
+
+		res.status(200).send({
+			error: false,
+			count: data.length,
+			result: data,
+		});
+	},
+
+	listInCategory: async (req, res) => {
+		const data = await BlogPost.find({ blogCategoryId: req.params.categoryId }).populate("blogCategoryId"); // get primary data
 
 		res.status(200).send({
 			error: false,
@@ -91,7 +101,8 @@ module.exports.BlogPost = {
 	read: async (req, res) => {
 		// req.params.postId
 		// const data = await BlogPost.findById(req.params.postId );
-		const data = await BlogPost.findOne({ _id: req.params.postId });
+		// const data = await BlogPost.findOne({ _id: req.params.postId });
+		const data = await BlogPost.findOne({ _id: req.params.postId }).populate("blogCategoryId");
 
 		res.status(200).send({
 			error: false,
