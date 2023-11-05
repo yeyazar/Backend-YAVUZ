@@ -19,4 +19,4 @@ router.route("/user/:userId")
     .put(User.update)
     .delete(User.delete);
 
-    
+module.exports = router;
