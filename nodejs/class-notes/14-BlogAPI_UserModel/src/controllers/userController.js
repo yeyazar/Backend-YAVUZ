@@ -77,6 +77,11 @@ module.exports.User = {
 					},
 				};
 
+				if (req.body?.rememberMe) {
+					// Set Cookie maxAge
+					req.sessionOptions.maxAge= 1000 * 60 * 60 * 24 * 3 // 3 days
+				}
+
 				res.status(200).send({
 					error: false,
 					result: user,

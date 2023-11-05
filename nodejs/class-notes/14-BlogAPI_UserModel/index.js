@@ -25,7 +25,7 @@ app.use(
 	session({
 		secret: process.env.SECRET_KEY || "secret_keys_for_cookies",
 		// name: cookie,  // default:req.session
-		maxAge: 1000 * 60 * 60 * 24, // 1 day in ms
+		// maxAge: 1000 * 60 * 60 * 24, // 1 day in ms
 	})
 );
 
