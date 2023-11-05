@@ -61,6 +61,14 @@ const blogCategorySchema = new mongoose.Schema(
 // ------------------------------------------
 const blogPostSchema = new mongoose.Schema(
 	{
+		// _id ->> given automatically
+
+		blogCategoryId:{
+			type: mongoose.Schema.ObjectId, // Relational ObjectId
+			ref: 'BlogCategory', // ModelName down below
+			required: true,
+		},
+
 		title: {
 			type: String,
 			trim: true,
