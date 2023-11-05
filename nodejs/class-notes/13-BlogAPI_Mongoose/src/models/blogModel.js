@@ -24,17 +24,9 @@ const nameSchema = new mongoose.Schema(
 			enum: [[0, 1, 2, 3], "Error-Message"], // Pattern / Constraint
 			validate: [
 				// Filter function
-				function (data) {
-					return true;
-				},
-				"Error-Message",
-			],
-			get: function (data) {
-				return true;
-			},
-			set: function (data) {
-				return true;
-			},
+				function (data) {return true;},"Error-Message",],
+			get: function (data) {return true;},
+			set: function (data) {return true;},
 		},
 	},
 	{
@@ -45,6 +37,28 @@ const nameSchema = new mongoose.Schema(
 
 /*------------------------------------------------------- */
 
+/* ------------------------------------------------------- */
+// ------------------------------------------
+// BlogCategory
+// ------------------------------------------
+
+const blogCategorySchema = new mongoose.Schema(
+	{
+		name: {
+			type: String,
+			trim: true,
+			required: true,
+		},
+	},
+	{
+		collection: "blogCategories",
+		timestamps: true,
+	}
+);
+
+// ------------------------------------------
+// BlogPost
+// ------------------------------------------
 const blogPostSchema = new mongoose.Schema(
 	{
 		title: {
